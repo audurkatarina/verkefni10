@@ -4,7 +4,6 @@
 let title; // titill fyrir mynd á forsíðu
 let text; // texti fyrir mynd á forsíðu
 let img; // mynd á forsíðu
-
 let image; // object sem inniheldur núverandi mynd á forsíðu.
 
 /*
@@ -27,7 +26,9 @@ function saveCurrentImage() {
  *
  */
 export default function init(apod) {
-
+    const button = apod.querySelectorAll('button');
+    button[0].addEventListener('click', getNewImage());
+    button[1].addEventListener('click', saveCurrentImage());
 }
 
 /*

@@ -45,5 +45,6 @@ export function randomNumber(min, max) {
  * @param {*} end 
  */
 export function randomDate(start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  var date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return `${date.getFullYear}-${date.getMonth}-${date.getDate}`;
 }
