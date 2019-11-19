@@ -38,3 +38,12 @@ export function el(name, ...children) {
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+/**
+ * Skilar degi sem valinn var af handahófi
+ * @param {*} start 
+ * @param {*} end 
+ */
+export function randomDate(start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
