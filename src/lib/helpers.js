@@ -41,10 +41,8 @@ export function randomNumber(min, max) {
 
 /**
  * Skilar degi sem valinn var af handahófi
- * @param {*} start 
- * @param {*} end 
  */
 export function randomDate(start, end) {
-  var date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  return `${date.getFullYear}-${date.getMonth}-${date.getDate}`;
+  const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }

@@ -5,13 +5,6 @@
 // Fast sem skilgreinir heiti á lykli sem vistað er undir í localStorage
 const LOCALSTORAGE_KEY = 'favourite_spacephotos';
 
-function makeList(oldList, newList) {
-  const oldString = oldList.substring(0, oldList.length - 1);
-  const newString = newList.substring(1, newList.length - 1);
-  const list = `${oldString},${newString}]`;
-  return list;
-}
-
 /**
  * Sækir gögn úr localStorage. Skilað sem lista á forminu:
  * [{ type, mediaUrl, text, title },
@@ -22,12 +15,8 @@ function makeList(oldList, newList) {
  * @returns {array} fylki af myndum eða tóma fylkið ef ekkert vistað.
  */
 export function load() {
-  const savedImages = localStorage.getItem(LOCALSTORAGE_KEY);
-  if(savedImages){
-    const obj = JSON.parse(savedImages);
-    return obj;
-  }
-  return [];
+  const saved = JSON.parse(window.localStorage.getItem(LOCALSTORAGE_KEY)) || [];
+  return saved;
 }
 
 /**
@@ -39,12 +28,16 @@ export function load() {
  * @param {string} title titill fyrir myndina/myndbandið.
  */
 export function save(type, mediaUrl, text, title) {
-  let data = [{type, mediaUrl, text, title}];
-  const savedImages = localStorage.getItem(LOCALSTORAGE_KEY);
-  if(savedImages){
-    data = JSON.parse(makeList(savedImages, JSON.stringify(data)));
+  const data = [{
+    type, mediaUrl, text, title,
+  }];
+  let savedImages = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+  if (savedImages === null) {
+    savedImages = { data };
+  } else {
+    savedImages.push(JSON.stringify(data));
   }
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(data));
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(savedImages));
 }
 
 
